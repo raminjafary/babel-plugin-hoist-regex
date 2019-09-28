@@ -1,0 +1,14 @@
+{
+  "name": "babel-plugin-hoist-regex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel src/test.js -o src/script-test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2"
+  }
+}
