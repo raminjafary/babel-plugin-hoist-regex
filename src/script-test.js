@@ -1,18 +1,17 @@
-const _rgx = /[0-9]+/;
+"use strict";
+
+const _rgx = new RegExp('\\d+');
+
 const _regex = /[0-9]+/;
 
-function ramin(numberLiteral) {
-  const {
-    input
-  } = _regex.exec(numberLiteral);
+function validateOneWay(value) {
+  var result = _regex.exec(value);
 
-  const a = () => {
-    const {
-      input
-    } = _regex.exec(numberLiteral);
-  };
+  return (validateTheOtherWay = function validateTheOtherWay() {
+    var input = _rgx.test(result.input);
 
-  return input;
+    return input;
+  })();
 }
 
-ramin(123456789);
+validateOneWay(123456789);

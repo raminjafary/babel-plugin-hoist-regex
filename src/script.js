@@ -1,10 +1,10 @@
-function ramin(numberLiteral) {
+function validateOneWay(value) {
   const regex = /[0-9]+/
-  const {input} = regex.exec(numberLiteral)
-  const a = () => {
-    const rgx = /[0-9]+/
-    const {input} = regex.exec(numberLiteral)
-  }
-  return input
+  const result = regex.exec(value)
+  return (validateTheOtherWay = () => {
+    const rgx = new RegExp('\\d+')
+    const input = rgx.test(result.input)
+    return input
+  })()
 }
-ramin(123456789)
+validateOneWay(123456789)

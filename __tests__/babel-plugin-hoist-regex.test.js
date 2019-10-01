@@ -2,15 +2,16 @@ const babel = require('@babel/core')
 const babelPluginHoistRegex = require('../lib')
 
 const example = `
-function ramin(numberLiteral) {
+function validateOneWay(value) {
   const regex = /[0-9]+/
-  const {input} = regex.exec(numberLiteral)
-  const a = () => {
-    const rgx = /[0-9]+/
-    const {input} = regex.exec(numberLiteral)
-  }
-  return input
+  const result = regex.exec(value)
+  return (validateTheOtherWay = () => {
+    const rgx = new RegExp('\\d+')
+    const input = rgx.test(result.input)
+    return input
+  })()
 }
+validateOneWay(123456789)
 `
 
 describe('babelPluginHoistRegex Test', () => {
@@ -29,13 +30,14 @@ describe('babelPluginHoistRegex Test', () => {
     expect(declaration.id.name).toEqual('_rgx')
     // or babelTraverse(program, {visitor: ...})
   })
+
   test('Exec', () => {
     const {code} = babel.transform(example, {plugins: [babelPluginHoistRegex]})
-    const f = new Function(`
-    ${code};
-    return regex = _regex;
-  `)
-    const regex = f()
-    expect(regex).toBe(regex)
+    // const f = new Function(`
+    //   ${code};
+    //   return result = _regex
+    // `)
+    // const regex = f()
+    // expect(regex).toBe(regex)
   })
 })
