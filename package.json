@@ -1,12 +1,12 @@
 {
   "name": "babel-plugin-hoist-regex",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "babel": "./node_modules/.bin/babel src/script.js -o src/script-test.js",
-    "build:all": "babel src -d build",
-    "build:one": "babel src/script.js -d build",
+    "babel": "babel examples/index.js -o examples/index-transformed.js",
+    "build-all": "babel examples -d build",
+    "build-one": "babel examples/index.js -d build",
     "test": "jest -u --coverage"
   },
   "dependencies": {},
