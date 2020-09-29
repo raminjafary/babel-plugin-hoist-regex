@@ -1,1 +1,1 @@
-# babel-plugin-hoist-regex
+# Hoist regex on top of execution context
