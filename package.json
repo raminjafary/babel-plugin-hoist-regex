@@ -14,7 +14,7 @@
     "@babel/cli": "7.6.2",
     "@babel/core": "7.6.2",
     "@babel/preset-env": "7.6.2",
-    "babel-plugin-tester": "7.0.1",
+    "babel-plugin-tester": "7.0.4",
     "jest": "24.9.0"
   },
   "browserslist": [
