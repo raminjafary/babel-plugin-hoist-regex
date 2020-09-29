@@ -1,5 +1,5 @@
 TN:
-SF:/home/ramin/Desktop/babel-plugin-hoist-regex/lib/index.js
+SF:lib/index.js
 FNF:0
 FNH:0
 DA:1,1
@@ -10,7 +10,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/ramin/Desktop/babel-plugin-hoist-regex/lib/rules/babel-plugin-hoist-regex.js
+SF:lib/rules/babel-plugin-hoist-regex.js
 FN:1,babelPluginHoistRegex
 FN:7,(anonymous_1)
 FNF:2
