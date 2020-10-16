@@ -11,7 +11,7 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.1",
+    "@babel/core": "7.12.3",
     "@babel/preset-env": "7.12.1",
     "babel-plugin-tester": "10.0.0",
     "jest": "26.5.3"
