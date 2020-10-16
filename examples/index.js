@@ -1,10 +1,10 @@
-function validateOneWay(value) {
+function literalRegxp(value) {
   const regex = /[0-9]+/
   const result = regex.exec(value)
-  return (validateTheOtherWay = () => {
+  return (constructorRegxp = () => {
     const rgx = new RegExp('\\d+')
     const input = rgx.test(result.input)
     return input
   })()
 }
-validateOneWay(123456789)
+literalRegxp(123456789)
