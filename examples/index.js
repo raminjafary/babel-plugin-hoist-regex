@@ -1,10 +1,10 @@
-function literalRegxp(value) {
+function literalRegExp(value) {
   const regex = /[0-9]+/
   const result = regex.exec(value)
-  return (constructorRegxp = () => {
+  return (newRegExp = () => {
     const rgx = new RegExp('\\d+')
     const input = rgx.test(result.input)
     return input
   })()
 }
-literalRegxp(123456789)
+literalRegExp(123456789)
