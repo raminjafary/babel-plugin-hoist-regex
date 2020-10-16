@@ -1,8 +1,17 @@
 {
   "name": "babel-plugin-hoist-regex",
+  "description": "A simple babel plugin to hoist regular expressions",
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
+  "author": "<raminjafary1993@gmail.com>",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raminjafary/babel-plugin-hoist-regex"
+  },
   "scripts": {
     "build-all": "babel examples -d build",
     "build-one": "babel examples/index.js -d build",
