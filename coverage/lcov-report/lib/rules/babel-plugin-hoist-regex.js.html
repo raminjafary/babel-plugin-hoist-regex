@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">77.78% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -77,7 +77,43 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -88,35 +124,44 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function babelPluginHoistRegex(babel) {
-  const {types: t} = babel
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function transformRegExp(path, t) {
+  const identifier = path.scope.generateUidIdentifier(path.parent.id.name)
+  const variableDec = t.VariableDeclaration('const', [
+    t.VariableDeclarator(identifier, path.node)
+  ])
+  path.scope.rename(path.parent.id.name, identifier.name)
+  const program = path.findParent(t.isProgram)
+  program.node.body.unshift(variableDec)
+  path.parentPath.remove()
+}
+&nbsp;
+function isRegExpWithNew(node) {
+  return (
+    node.type === 'NewExpression'
+    &amp;&amp; node.callee.type === 'Identifier'
+    &amp;&amp; node.callee.name === 'RegExp'
+    &amp;&amp; (node.arguments[0].type === 'StringLiteral' ||
+<span class="branch-4 cbranch-no" title="branch not covered" >      node.arguments[0].type === 'TemplateLiteral')</span>
+  )
+}
+&nbsp;
+module.exports = function babelPluginHoistRegex(babel) {
+  const { types: t } = babel
 &nbsp;
   return {
     name: 'babel-plugin-hoist-regex',
     visitor: {
       'RegExpLiteral|NewExpression'(path) {
-        const newIdent = path.scope.generateUidIdentifier(path.parent.id.name)
-        const variableDec = t.VariableDeclaration('const', [
-          t.VariableDeclarator(newIdent, path.node)
-        ])
-        path.scope.rename(path.parent.id.name, newIdent.name)
-        const program = path.findParent(t.isProgram)
-        program.node.body.unshift(variableDec)
-        path.parentPath.remove()
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (path.node.type === 'RegExpLiteral' || isRegExpWithNew(path.node)) {
+          transformRegExp(path, t)
+        }
       }
     }
   }
 }
-module.exports = babelPluginHoistRegex
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -124,7 +169,7 @@ module.exports = babelPluginHoistRegex
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Sep 29 2020 18:14:21 GMT+0330 (Iran Standard Time)
+                at Fri Oct 16 2020 23:51:28 GMT+0330 (Iran Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
