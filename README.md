@@ -1,6 +1,6 @@
-[![npm][npm]][npm-url]
-
 # Babel Plugin Hoist Regex
+
+[![npm][npm]][npm-url]
 
 > A simple babel plugin to hoist regular expressions
 
