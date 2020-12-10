@@ -1,5 +1,7 @@
 # Babel Plugin Hoist Regex
 
+[![npm][npm]][npm-url]
+
 > A simple babel plugin to hoist regular expressions
 
 ## Installation
@@ -62,3 +64,6 @@ literalRegExp(123456789);
 ## License
 
 MIT
+
+[npm]: https://badgen.net/npm/v/babel-plugin-hoist-regex
+[npm-url]: https://www.npmjs.com/package/babel-plugin-hoist-regex
