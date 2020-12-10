@@ -37,7 +37,6 @@ function literalRegExp(value) {
     return input
   })()
 }
-literalRegExp(123456789)
 
 ```
 ### After transpilation:
@@ -56,8 +55,6 @@ function literalRegExp(value) {
     return input;
   })();
 }
-
-literalRegExp(123456789);
 
 ```
 

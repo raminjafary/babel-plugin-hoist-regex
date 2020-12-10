@@ -7,4 +7,3 @@ function literalRegExp(value) {
     return input
   })()
 }
-literalRegExp(123456789)
